@@ -2,7 +2,8 @@
 // assignment module 20 (firebase):
 // upload images to firebase storage, and show in gridview
 
-import 'package:app2_fire_storage/upload_screen.dart';
+//import 'package:app2_fire_storage/upload_screen.dart';
+import 'package:app2_fire_storage/upload_screen2.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -21,13 +22,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const UploadScreen(),
+      home: const UploadScreen2(),
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),),
+            //shape: const CircleBorder(),
             backgroundColor: Colors.blue[500],
             foregroundColor: Colors.green[100],
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

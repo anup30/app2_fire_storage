@@ -1,10 +1,9 @@
 // assignment module 20 (firebase):
 // upload images to firebase storage, and show in gridview
+import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -22,16 +21,18 @@ class _UploadScreenState extends State<UploadScreen> {
   List<String?> urlImageList = [];
 
   pickCameraImage()async{
-    XFile? res= await _imagePicker.pickImage(source: ImageSource.camera);
-    if(res!=null){
-      uploadToFirebase(File(res.path)); // <--- image file
+    XFile? pickedFile= await _imagePicker.pickImage(source: ImageSource.camera);
+    //print("${pickedFile?.name}"); ///
+    if(pickedFile!=null){
+      uploadToFirebase(File(pickedFile.path)); // <--- image file
     }
   }
 
   pickGalleryImage()async{
-    XFile? res= await _imagePicker.pickImage(source: ImageSource.gallery);
-    if(res!=null){
-      uploadToFirebase(File(res.path)); // <--- image file
+    XFile? pickedFile= await _imagePicker.pickImage(source: ImageSource.gallery);
+    //print("${pickedFile?.name}"); ///
+    if(pickedFile!=null){
+      uploadToFirebase(File(pickedFile.path)); // <--- image file
     }
   }
 
@@ -39,20 +40,21 @@ class _UploadScreenState extends State<UploadScreen> {
     _isLoading=true;
     setState(() {});
     try {
-      Reference sr = FirebaseStorage.instance.ref() //storage Reference
-          .child("pictures/${DateTime.now().millisecondsSinceEpoch}.png");
-      await sr.putFile(image).whenComplete(() => {
+      Reference storageRef = FirebaseStorage.instance.ref() //storage Reference
+          .child("images/${DateTime.now().millisecondsSinceEpoch}.png"); //also try, create unique id, by uuid package
+      // ^ creates new folder in storage if absent
+      await storageRef.putFile(image).whenComplete(() => {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Image uploaded to 🔥Firebase"),
             duration: Duration(seconds: 3),
           ),
         ),
       });
-      urlImage = await sr.getDownloadURL();
+      urlImage = await storageRef.getDownloadURL(); // String?
+      urlImageList.add(urlImage);
     } catch (e) {
-      print("error occurred: $e");
+      log("error occurred: $e");
     }
-    urlImageList.add(urlImage);
     _isLoading=false;
     setState(() {});
   }
