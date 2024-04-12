@@ -2,7 +2,9 @@
 // upload images to firebase storage, and show in gridview
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -54,24 +56,55 @@ class _UploadScreenState extends State<UploadScreen> {
     _isLoading=false;
     setState(() {});
   }
-  // final elevatedButtonStyleFrom = ElevatedButton.styleFrom(
-  //   backgroundColor: Colors.blue[50],
-  //   foregroundColor: Colors.green[800],
-  //   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-  //   textStyle: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-  // );
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Firebase Storage Example',style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.green[100],
+          ),
+          ),
+          backgroundColor: Colors.blue,
+          elevation: 3,
+          shadowColor: Colors.grey,
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 10,),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 5,
+                  ),
+                  itemBuilder: (context,index) {
+                    return SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Image.network(
+                        urlImageList[index]!,
+                        fit: BoxFit.contain,
+                      ),
+                    );
+                  },
+                  itemCount: urlImageList.length,
+                  scrollDirection: Axis.vertical,
+                  //shrinkWrap: true,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10,),
             _isLoading==false? Text(
-              "Total images added to firebase Storage: ${urlImageList.length}",
+              "Images added to firebase Storage= ${urlImageList.length}",
               style: const TextStyle(fontSize: 20),
             ):
             const Center(
@@ -98,28 +131,7 @@ class _UploadScreenState extends State<UploadScreen> {
               label: const Text('Upload Camera Image',style: TextStyle(fontSize: 20),),
               //style: elevatedButtonStyleFrom,
             ),
-            const SizedBox(height: 10,),
-            /// gridview
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 3,
-                ),
-                itemBuilder: (context,index) {
-                  return SizedBox(
-                    width: 100,
-                    height: 100,
-                    child: Image.network(
-                      urlImageList[index]!,
-                      fit: BoxFit.contain,
-                    ),
-                  );
-                },
-                itemCount: urlImageList.length,
-                scrollDirection: Axis.vertical, // vertical, horizontal
-              ),
-            ),
+            const SizedBox(height: 12,),
           ],
         ),
       ),
