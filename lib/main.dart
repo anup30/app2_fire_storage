@@ -24,14 +24,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const UploadScreen(),
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue,
+          elevation: 3,
+          shadowColor: Colors.grey,
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8),),
-            //shape: const CircleBorder(),
-            backgroundColor: Colors.blue[500],
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24),),
+            backgroundColor: Colors.indigo[500],
             foregroundColor: Colors.green[100],
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             textStyle: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+            elevation: 3,
+            //shadowColor: Colors.green,
           ),
         ),
       ),

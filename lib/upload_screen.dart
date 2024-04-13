@@ -33,15 +33,22 @@ class _UploadScreenState extends State<UploadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Firebase Storage Example',style: TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.bold,
-          color: Colors.green[100],
+        title: Text('Firebase Storage Example',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.green[100],
+          ),
         ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.cyan, Colors.indigo],
+            ),
+          ),
         ),
-        backgroundColor: Colors.blue,
-        elevation: 3,
-        shadowColor: Colors.grey,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
