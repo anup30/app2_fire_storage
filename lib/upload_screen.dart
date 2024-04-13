@@ -98,7 +98,6 @@ class _UploadScreenState extends State<UploadScreen> {
             },
             icon: const Icon(Icons.image),
             label: const Text('Upload Gallery Image',style: TextStyle(fontSize: 20),),
-            //style: elevatedButtonStyleFrom,
           ),
           const SizedBox(height: 8,),
           ElevatedButton.icon(
@@ -107,7 +106,6 @@ class _UploadScreenState extends State<UploadScreen> {
             },
             icon: const Icon(Icons.camera),
             label: const Text('Upload Camera Image',style: TextStyle(fontSize: 20),),
-            //style: elevatedButtonStyleFrom,
           ),
           const SizedBox(height: 12,),
         ],
