@@ -112,6 +112,7 @@ class _UploadScreenState extends State<UploadScreen> {
       ),
     );
   }
+
   pickCameraImage()async{
     XFile? pickedFile= await _imagePicker.pickImage(source: ImageSource.camera);
     if(pickedFile!=null){
@@ -147,6 +148,7 @@ class _UploadScreenState extends State<UploadScreen> {
     _isLoading=false;
     setState(() {});
   }
+
   Future<void> firebaseStorageAllImageUrlLoad() async{
     _isLoading=true;
     setState(() {});
@@ -159,4 +161,5 @@ class _UploadScreenState extends State<UploadScreen> {
     _isLoading=false;
     setState(() {});
   }
+
 }
