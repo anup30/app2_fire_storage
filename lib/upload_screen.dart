@@ -53,8 +53,71 @@ class _UploadScreenState extends State<UploadScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+        children: <Widget>[
           const SizedBox(height: 10,),
+          GestureDetector(
+            onTap: (){
+              pickGalleryImage();
+            },
+            child: Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.cyan, Colors.indigo],
+                ),
+              ),
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 12),
+                  child: Row(mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.image,color: Colors.green[100],),
+                      const SizedBox(width: 4,),
+                      Text('Upload Gallery Image',style: TextStyle(fontSize: 20,color: Colors.green[100]),),
+                    ],
+                  ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 8,),
+          GestureDetector(
+            onTap: (){
+              pickCameraImage();
+            },
+            child: Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.cyan, Colors.indigo],
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 12),
+                child: Row(mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.camera,color: Colors.green[100],),
+                    const SizedBox(width: 4,),
+                    Text('Upload Camera Image',style: TextStyle(fontSize: 20,color: Colors.green[100]),),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 12,),
+          _isLoading==false? Text(
+            "Images in firebase Storage= ${urlImageList.length}",
+            style: const TextStyle(fontSize: 22),
+          ):
+          const Center(
+            child: SizedBox(
+              height: 35,width: 35,
+              child: CircularProgressIndicator(),
+            ),
+          ),
+          const SizedBox(height: 12,),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -80,34 +143,7 @@ class _UploadScreenState extends State<UploadScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 10,),
-          _isLoading==false? Text(
-            "Images in firebase Storage= ${urlImageList.length}",
-            style: const TextStyle(fontSize: 22),
-          ):
-          const Center(
-            child: SizedBox(
-              height: 30,width: 30,
-              child: CircularProgressIndicator(),
-            ),
-          ),
-          const SizedBox(height: 10,),
-          ElevatedButton.icon(
-            onPressed: (){
-              pickGalleryImage();
-            },
-            icon: const Icon(Icons.image),
-            label: const Text('Upload Gallery Image',style: TextStyle(fontSize: 20),),
-          ),
-          const SizedBox(height: 8,),
-          ElevatedButton.icon(
-            onPressed: (){
-              pickCameraImage();
-            },
-            icon: const Icon(Icons.camera),
-            label: const Text('Upload Camera Image',style: TextStyle(fontSize: 20),),
-          ),
-          const SizedBox(height: 12,),
+          const SizedBox(height: 24,),
         ],
       ),
     );
@@ -161,5 +197,4 @@ class _UploadScreenState extends State<UploadScreen> {
     _isLoading=false;
     setState(() {});
   }
-
 }

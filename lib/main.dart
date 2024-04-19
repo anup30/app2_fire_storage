@@ -2,7 +2,6 @@
 // assignment module 20 (firebase):
 // upload images to firebase storage, and show in gridview
 
-
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
